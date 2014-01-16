@@ -28,9 +28,64 @@ endif
 let g:blockit_H_char = exists('g:blockit_H_char')? g:blockit_H_char : '=-'
 let g:blockit_V_char = exists('g:blockit_V_char')? g:blockit_V_char : '|'
 let g:blockit_margin = exists('g:blockit_margin')? g:blockit_margin : 1
+"//////////////////////////////////////////////////////////////////////
+"                         Helper  functions                         
+"//////////////////////////////////////////////////////////////////////
+"{{{
+"============================
+" get visual selected text
+"============================
+function! blockit#get_visual_text()
+  try
+    let v_save = @v
+    normal! gv"vy
+    return @v
+  finally
+    let @v = v_save
+  endtry
+endfunction
+}}}
 
-function! blockit#block() range
-    let lines = getline(a:firstline,a:lastline)
+
+
+"//////////////////////////////////////////////////////////////////////
+"                          Logic   functions                          /
+"//////////////////////////////////////////////////////////////////////
+function! blockit#print_result() range
+	
+		
+endfunction
+
+
+"============================
+" handle visual selection, in fact 
+" only block-wise select needs special
+" handling
+"
+" the invokation of this function should 
+" be come from mapping, instread of command
+"============================
+function! blockit#block_visual()
+	let txt = blockit#get_visual_text()
+	let lines = split(txt, '\n')
+	"line range
+	let first = line("'<")
+	let last  = line("'>")
+endfunction
+
+
+"============================
+"the block main logic 
+"parameters:
+"
+"first : the first line number
+"last  : the first line number
+"lines : a list, contains all text needs to be blocked
+"
+"return a list, with block characters
+"============================
+function! blockit#block(first, last, lines)
+    let lines = getline(a:first,a:last)
     let maxl = 0
     for l in lines
         let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
@@ -45,10 +100,11 @@ function! blockit#block() range
     let result = [h]
     call extend(result, lines)
     call add(result,h)
-    execute a:firstline.','.a:lastline . ' d _'
-    let s = a:firstline-1<0?0:a:firstline-1
+    execute a:first.','.a:last . ' d _'
+    let s = a:first-1<0?0:a:first-1
     call append(s, result)
 endfunction
+
 
 "=================================
 " calculate the header/bottom border
