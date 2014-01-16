@@ -25,29 +25,43 @@ if exists("g:autoloaded_blockit")
 endif
 "let g:autoloaded_blockit = 1
 
-let g:blockit_H_char = exists('g:blockit_H_char')? g:blockit_H_char : '=-'
+
+"//////////////////////////////////////////////////////////////////////
+"                              Variables                              /
+"//////////////////////////////////////////////////////////////////////{{{
+let g:blockit_H_char = exists('g:blockit_H_char')? g:blockit_H_char : '='
 let g:blockit_V_char = exists('g:blockit_V_char')? g:blockit_V_char : '|'
 let g:blockit_margin = exists('g:blockit_margin')? g:blockit_margin : 1
+let g:blockit_fixed_length = exists('g:blockit_fixed_length')? g:blockit_fixed_length : 100
+
+"}}}
 
 function! blockit#block() range
-    let lines = getline(a:firstline,a:lastline)
-    let maxl = 0
+
+  let lines = getline(a:firstline,a:lastline)
+  let maxl = 0
+  if g:blockit_fixed_length > 4 "length was fixed
+    let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char))
+  else
+    "calculate the maxl
     for l in lines
-        let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
+      let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
     endfor
-	"the header/bottom line
-    let h = blockit#calc_header(maxl)
-	" the string para used for map()
-	let map_str = "g:blockit_V_char . repeat(' ', g:blockit_margin)"
-	let map_str = map_str . ".v:val . repeat(' ', maxl-strdisplaywidth(v:val))"
-	let map_str = map_str . ".repeat(' ', g:blockit_margin) . g:blockit_V_char"
-	call map(lines, map_str)
-    let result = [h]
-    call extend(result, lines)
-    call add(result,h)
-    execute a:firstline.','.a:lastline . ' d _'
-    let s = a:firstline-1<0?0:a:firstline-1
-    call append(s, result)
+  endif
+  "the header/bottom line
+  let h = blockit#calc_header(maxl)
+  " the string para used for map()
+  let map_str = "g:blockit_V_char . repeat(' ', g:blockit_margin)"
+  let map_str = map_str . ".v:val . repeat(' ', maxl-strdisplaywidth(v:val))"
+  let map_str = map_str . ".repeat(' ', g:blockit_margin) . g:blockit_V_char"
+  call map(lines, map_str)
+  let result = [h]
+  call extend(result, lines)
+  call add(result,h)
+  execute a:firstline.','.a:lastline . ' d _'
+  let s = a:firstline-1<0?0:a:firstline-1
+  call append(s, result)
+
 endfunction
 
 "=================================
@@ -57,9 +71,11 @@ endfunction
 " the "block" should look pretty
 "=================================
 function! blockit#calc_header(maxlen)
-	let n = a:maxlen+(g:blockit_margin+strdisplaywidth(g:blockit_V_char))*2
-	let line = repeat(g:blockit_H_char, n)
-	return strpart(line, 0, n)
+  let n = a:maxlen+(g:blockit_margin+strdisplaywidth(g:blockit_V_char))*2
+  let line = repeat(g:blockit_H_char, n)
+  return strpart(line, 0, n)
 endfunction
 
 "TODO fixed width block
+
+" vim: fdm=marker ts=2 sw=2 tw=78 expandtab
