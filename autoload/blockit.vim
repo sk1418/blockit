@@ -35,6 +35,7 @@ let g:blockit_V_char = exists('g:blockit_V_char')? g:blockit_V_char : '|'
 let g:blockit_margin = exists('g:blockit_margin')? g:blockit_margin : 1
 let g:blockit_fixed_length = exists('g:blockit_fixed_length')? g:blockit_fixed_length : 0
 
+
 "}}}
 
 "//////////////////////////////////////////////////////////////////////
@@ -54,6 +55,14 @@ function! blockit#get_visual_text()
   endtry
 endfunction
 
+"============================
+" build HowMuch error message
+"============================
+function! blockit#err(msg)
+  echohl ErrorMsg
+  echon "[blockit Err]" . a:msg
+  echohl None
+endfunction
 "}}}
 
 
@@ -108,6 +117,10 @@ endfunction
 " be come from mapping, instread of command
 "============================
 function! blockit#block_visual()
+  if visualmode() ==# 'v'
+    call blockit#err("char-wise selection is not supported")
+    return
+  endif
   let txt = blockit#get_visual_text()
   let lines = split(txt, '\n')
   "line range
@@ -126,7 +139,7 @@ function! blockit#block_visual()
   execute pos[1] . 'pu! _'
   execute end_pos[1]+1 . 'pu _'
 
-  call setreg('v', result_txt, visualmode())
+  call setreg('v', result_txt,visualmode())
   normal! gvx
   call setpos('.', pos)
   normal! "vP
