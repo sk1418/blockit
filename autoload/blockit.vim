@@ -1,7 +1,7 @@
-" HowMuch : wrap lines in a block
+" blockit : wrap lines in a block
 " Author  : Kai Yuan <kent.yuan@gmail.com>
 " License: {{{
-"Copyright (c) 2013 Kai Yuan
+"Copyright (c) 2014 Kai Yuan
 "Permission is hereby granted, free of charge, to any person obtaining a copy of
 "this software and associated documentation files (the "Software"), to deal in
 "the Software without restriction, including without limitation the rights to
@@ -23,7 +23,7 @@
 if exists("g:autoloaded_blockit") 
   finish
 endif
-"let g:autoloaded_blockit = 1
+let g:autoloaded_blockit = 1
 
 
 "//////////////////////////////////////////////////////////////////////
