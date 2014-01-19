@@ -186,9 +186,7 @@ function! blockit#block(lines)
   let my_lines = a:lines
   let maxl = 0
   if g:blockit_fixed_length > s:fixed_min
-----------
-|     let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char)) |
-----------
+    let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char))
   else
     " get maxlen
     let maxl = blockit#max_len(my_lines)
