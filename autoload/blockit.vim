@@ -116,7 +116,7 @@ endfunction
 "=================================
 function! blockit#align_center(line, maxlen)
   let result = substitute(a:line, '\s*$', '', 'g')
-  let result = substitute(a:line, '^\s*', '', 'g')
+  let result = substitute(result, '^\s*', '', 'g')
   let diff = a:maxlen - strdisplaywidth(result)
   let diff_l = diff/2
   let diff_r = diff - diff_l
