@@ -23,7 +23,7 @@
 if exists("g:autoloaded_blockit") 
   finish
 endif
-"let g:autoloaded_blockit = 1
+let g:autoloaded_blockit = 1
 
 
 "//////////////////////////////////////////////////////////////////////

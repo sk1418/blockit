@@ -29,17 +29,18 @@ When we are coding or editing text in vim, sometimes we want to wrap some lines 
 
 
 ##Configuration
-There are 5 variables could be customized to configurate block style:
+There are 5 variables could be customized to configurate block style: (more detailed information please check the plugin doc.)
 
-varialbe                |values                                                 |default
----                     |---                                                    |---
-`g:blockit_H_char`      |`string:` horizontal border char(s)                    |`'-'`
-`g:blockit_V_char`      |`string:` vertical border char(s)                      |`'|'`
-`g:blockit_margin`      |`int:` margin between text and border                  |`1`
-`g:blockit_fixed_length`|`int:` if you want the block has fixed width, value >=5|`0`
-`g:blockit_align`       |`string:` one of `'c','l','r','n'`                     |`'n'` (no alignment)
+varialbe                 |values                                                 |default
+---                      |---                                                    |---
+`g:blockit_H_char`       |`string:` horizontal border char(s)                    |`'-'`
+`g:blockit_V_char`       |`string:` vertical border char(s)                      |`'&#124;'`
+`g:blockit_margin`       |`int:` margin between text and border                  |`1`
+`*g:blockit_fixed_length`|`int:` if you want the block has fixed width, value >=5|`0`
+`g:blockit_align`        |`string:` one of `'c','l','r','n'`                     |`'n'` (no alignment)
 
-more detailed information please check the plugin doc.
+** * ** for the fixed length, please read the plugin docs for details.
+
 
 ##Usage
 
