@@ -34,7 +34,7 @@ There are 5 variables could be customized to configurate block style: (more deta
 varialbe                 |values                                                 |default
 ---                      |---                                                    |---
 `g:blockit_H_char`       |`string:` horizontal border char(s)                    |`'-'`
-`g:blockit_V_char`       |`string:` vertical border char(s)                      |`'&#124;'`
+`g:blockit_V_char`       |`string:` vertical border char(s)                      |'&#124;'
 `g:blockit_margin`       |`int:` margin between text and border                  |`1`
 `*g:blockit_fixed_length`|`int:` if you want the block has fixed width, value >=5|`0`
 `g:blockit_align`        |`string:` one of `'c','l','r','n'`                     |`'n'` (no alignment)
