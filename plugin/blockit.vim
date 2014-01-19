@@ -31,7 +31,7 @@ command! BlockitVersion echo "[blockit] Version: " . sversion
 
 " mappings for visual selection
 "{{{
-vnoremap <silent><unique> <Plug>BlockitVisual      :call blockit#block_visual()<cr>
+vnoremap <silent><unique> <Plug>BlockitVisual      <c-u>:call blockit#block_visual()<cr>
 
 if !hasmapto('<Plug>BlockitVisual', 'v')
 	vmap <leader>bi <Plug>BlockitVisual
