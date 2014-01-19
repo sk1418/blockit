@@ -30,11 +30,11 @@ endif
 "                              Variables                              /
 "//////////////////////////////////////////////////////////////////////
 "{{{
-let g:blockit_H_char = exists('g:blockit_H_char')? g:blockit_H_char : '='
+let g:blockit_H_char = exists('g:blockit_H_char')? g:blockit_H_char : '-'
 let g:blockit_V_char = exists('g:blockit_V_char')? g:blockit_V_char : '|'
 let g:blockit_margin = exists('g:blockit_margin')? g:blockit_margin : 1
 let g:blockit_fixed_length = exists('g:blockit_fixed_length')? g:blockit_fixed_length : 0
-
+let g:blockit_align = exists('g:blockit_align')? g:blockit_align : 'n'
 
 "}}}
 
@@ -42,6 +42,90 @@ let g:blockit_fixed_length = exists('g:blockit_fixed_length')? g:blockit_fixed_l
 "                         Helper  functions                         
 "//////////////////////////////////////////////////////////////////////
 "{{{
+
+"=================================
+" calculate the header/bottom border
+" length, and return the built line
+" For example H_char was longer than 1
+" the "block" should look pretty
+"=================================
+function! blockit#calc_header(maxlen)
+  let n = a:maxlen+(g:blockit_margin+strdisplaywidth(g:blockit_V_char))*2
+  let line = repeat(g:blockit_H_char, n)
+  return strpart(line, 0, n)
+endfunction
+
+
+"=================================
+"get the max length of the line in 
+"given list. the fixed_length option
+"is considered too.
+"=================================
+function! blockit#max_len(lines)
+  let maxl = 0
+  if g:blockit_fixed_length > 4 "length was fixed
+    let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char))
+  else
+    "calculate the maxl
+    for l in a:lines
+      let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
+    endfor
+  endif
+  return maxl
+endfunction
+
+
+function! blockit#no_align(line, maxlen)
+  return a:line . repeat(' ', a:maxlen - strdisplaywidth(a:line))
+endfunction
+
+
+"=================================
+"do left align and extend the text
+"with spaces
+"return the processed line
+"=================================
+function! blockit#align_left(line, maxlen)
+  let result = substitute(a:line, '^\s*', '', 'g')
+  let diff = a:maxlen - strdisplaywidth(result)
+  if diff > 0
+    let result = result . repeat(' ', diff)
+  endif
+  return result
+endfunction
+
+
+"=================================
+"do right align and extend the text
+"with spaces
+"
+"return the processed line
+"=================================
+function! blockit#align_right(line, maxlen)
+  let result = substitute(a:line, '\s*$', '', 'g')
+  let diff = a:maxlen - strdisplaywidth(result)
+  if diff > 0
+    let result = repeat(' ', diff). result
+  endif
+  return result
+endfunction
+
+"=================================
+"do central align and extend the text
+"with spaces
+"
+"return the processed line
+"=================================
+function! blockit#align_center(line, maxlen)
+  let result = substitute(a:line, '\s*$', '', 'g')
+  let result = substitute(a:line, '^\s*', '', 'g')
+  let diff = a:maxlen - strdisplaywidth(result)
+  let diff_l = diff/2
+  let diff_r = diff - diff_l
+
+  return repeat(' ', diff_l). result . repeat(' ', diff_r)
+endfunction
+
 "============================
 " get visual selected text
 "============================
@@ -68,14 +152,16 @@ endfunction
 
 
 "//////////////////////////////////////////////////////////////////////
-"                          Logic   functions                          /
+"                   Main   Logic   functions                          /
 "//////////////////////////////////////////////////////////////////////
 
 "============================
 "the block main logic 
 "parameters:
 "
-"lines : a list, contains all text needs to be blocked
+"lines : a list, contains all text needs to be blocked, 
+"the text in line is already be extened with spaces to 
+"fit the maxlen (len of the longest line)
 "
 "return a list, with block characters
 "============================
@@ -85,17 +171,42 @@ function! blockit#block(lines)
   let maxl = blockit#max_len(my_lines)
   "the header/bottom line
   let h = blockit#calc_header(maxl)
-  " the string para used for map()
-  let map_str = "g:blockit_V_char . repeat(' ', g:blockit_margin)"
-  let map_str = map_str . ".v:val . repeat(' ', maxl-strdisplaywidth(v:val))"
-  let map_str = map_str . ".repeat(' ', g:blockit_margin) . g:blockit_V_char"
-  call map(my_lines, map_str)
+  
+  " block and align each line  using map()
+  call map(my_lines, 'blockit#block_single_line(v:val, maxl)')
+
   let result = [h]
   call extend(result, my_lines)
   call add(result,h)
   return result
 endfunction
 
+
+"============================
+" block the given line
+" align logic will be applied too
+"
+" return the aligned and blocked line
+"============================
+function! blockit#block_single_line(line, maxlen)
+  let result = a:line
+
+  "align
+  if g:blockit_align == 'l'
+    let result = blockit#align_left(result, a:maxlen)
+  elseif g:blockit_align == 'r'
+    let result = blockit#align_right(result, a:maxlen)
+  elseif g:blockit_align == 'c'
+    let result = blockit#align_center(result, a:maxlen)
+  else  " no align
+    let result = blockit#no_align(result, a:maxlen)
+  endif
+  "block the line
+  let result = g:blockit_V_char . repeat(' ', g:blockit_margin). result
+  let result = result . repeat(' ', g:blockit_margin) . g:blockit_V_char
+
+  return result
+endfunction
 "============================
 " block the text from command
 "============================
@@ -150,38 +261,6 @@ function! blockit#block_visual()
   
 endfunction
 
-
-
-"=================================
-" calculate the header/bottom border
-" length, and return the built line
-" For example H_char was longer than 1
-" the "block" should look pretty
-"=================================
-function! blockit#calc_header(maxlen)
-  let n = a:maxlen+(g:blockit_margin+strdisplaywidth(g:blockit_V_char))*2
-  let line = repeat(g:blockit_H_char, n)
-  return strpart(line, 0, n)
-endfunction
-
-
-"=================================
-"get the max length of the line in 
-"given list. the fixed_length option
-"is considered too.
-"=================================
-function! blockit#max_len(lines)
-  let maxl = 0
-  if g:blockit_fixed_length > 4 "length was fixed
-    let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char))
-  else
-    "calculate the maxl
-    for l in a:lines
-      let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
-    endfor
-  endif
-  return maxl
-endfunction
 
 
 
