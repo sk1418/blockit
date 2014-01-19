@@ -39,7 +39,7 @@ varialbe                 |values                                                
 `*g:blockit_fixed_length`|`int:` if you want the block has fixed width, value >=5|`0`
 `g:blockit_align`        |`string:` one of `'c','l','r','n'`                     |`'n'` (no alignment)
 
-** * ** for the fixed length, please read the plugin docs for details.
+***** for the fixed length, please read the plugin docs for details.
 
 
 ##Usage
@@ -66,3 +66,23 @@ You can of course customize the mapping in this way:
 	vmap (Your_Mapping) <Plug>BlockitVisual
 
 ##Demo
+
+###Demo1 
+- dynamic block width
+- blockit via command
+- text alignment: `center`
+
+
+###Demo2
+- dynamic block width
+- H-char in border: `.-`
+- V-char in border: `..`
+- blockit via visual selection
+- text alignment: `right`
+
+###Demo3
+- fixed block width: `40`
+- blockit via visual selection
+- H-char in border: `<>`
+- V-char in border: `<>`
+- text alignment: `no-alignment(default)`

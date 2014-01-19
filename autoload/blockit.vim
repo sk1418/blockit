@@ -157,13 +157,13 @@ endfunction
 " validate the fixed_length if it is set 
 "============================
 function! blockit#validate(lines)
-  if g:blockit_fixed_length>s:fixed_min && g:blockit_fixed_length <= (g:blockit_margin + g:blockit_V_char)*2 
-    call blockit#err('Fixed length is too short')
-    return -1
-  else
-    let maxl = blockit#max_len(a:lines)
-    "error & exit if fixed_length was set (>5) but less than maxl+margin+V(chars)
-    if g:blockit_fixed_length < ((g:blockit_margin + strdisplaywidth(g:blockit_V_char))*2 + maxl)
+  let maxl = blockit#max_len(a:lines)
+  if g:blockit_fixed_length>s:fixed_min 
+    if g:blockit_fixed_length <= (g:blockit_margin + g:blockit_V_char)*2 
+      call blockit#err('Fixed length is too short')
+      return -1
+      "error & exit if fixed_length was set (>5) but less than maxl+margin+V(chars)
+    elseif g:blockit_fixed_length < ((g:blockit_margin + strdisplaywidth(g:blockit_V_char))*2 + maxl)
       call blockit#err('The fixed_length was defined, does not fit the longest line')
       return -1
     endif
