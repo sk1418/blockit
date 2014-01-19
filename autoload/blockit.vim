@@ -23,7 +23,7 @@
 if exists("g:autoloaded_blockit") 
   finish
 endif
-let g:autoloaded_blockit = 1
+"let g:autoloaded_blockit = 1
 
 
 "//////////////////////////////////////////////////////////////////////
@@ -35,6 +35,9 @@ let g:blockit_V_char = exists('g:blockit_V_char')? g:blockit_V_char : '|'
 let g:blockit_margin = exists('g:blockit_margin')? g:blockit_margin : 1
 let g:blockit_fixed_length = exists('g:blockit_fixed_length')? g:blockit_fixed_length : 0
 let g:blockit_align = exists('g:blockit_align')? g:blockit_align : 'n'
+
+"min value of fixed length
+let s:fixed_min = 4
 
 "}}}
 
@@ -58,19 +61,14 @@ endfunction
 
 "=================================
 "get the max length of the line in 
-"given list. the fixed_length option
-"is considered too.
+"given list.
 "=================================
 function! blockit#max_len(lines)
   let maxl = 0
-  if g:blockit_fixed_length > 4 "length was fixed
-    let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char))
-  else
     "calculate the maxl
     for l in a:lines
       let maxl = strdisplaywidth(l)>maxl? strdisplaywidth(l):maxl
     endfor
-  endif
   return maxl
 endfunction
 
@@ -156,6 +154,25 @@ endfunction
 "//////////////////////////////////////////////////////////////////////
 
 "============================
+" validate the fixed_length if it is set 
+"============================
+function! blockit#validate(lines)
+  if g:blockit_fixed_length>s:fixed_min && g:blockit_fixed_length <= (g:blockit_margin + g:blockit_V_char)*2 
+    call blockit#err('Fixed length is too short')
+    return -1
+  else
+    let maxl = blockit#max_len(a:lines)
+    "error & exit if fixed_length was set (>5) but less than maxl+margin+V(chars)
+    if g:blockit_fixed_length < ((g:blockit_margin + strdisplaywidth(g:blockit_V_char))*2 + maxl)
+      call blockit#err('The fixed_length was defined, does not fit the longest line')
+      return -1
+    endif
+  endif
+
+  return 1
+endfunction
+
+"============================
 "the block main logic 
 "parameters:
 "
@@ -167,8 +184,16 @@ endfunction
 "============================
 function! blockit#block(lines)
   let my_lines = a:lines
-  " get maxlen
-  let maxl = blockit#max_len(my_lines)
+  let maxl = 0
+  if g:blockit_fixed_length > s:fixed_min
+----------
+|     let maxl = g:blockit_fixed_length - 2* (g:blockit_margin + strdisplaywidth(g:blockit_V_char)) |
+----------
+  else
+    " get maxlen
+    let maxl = blockit#max_len(my_lines)
+  endif
+
   "the header/bottom line
   let h = blockit#calc_header(maxl)
   
@@ -212,6 +237,10 @@ endfunction
 "============================
 function! blockit#block_cmd() range
   let lines = getline(a:firstline,a:lastline)
+  "validation
+  if blockit#validate(lines) < 0
+    return
+  endif
   execute a:firstline.','.a:lastline . ' d _'
   let real_first = a:firstline-1<0?0:a:firstline-1
   let result = blockit#block(lines)
@@ -232,8 +261,14 @@ function! blockit#block_visual()
     call blockit#err("char-wise selection is not supported")
     return
   endif
+
   let txt = blockit#get_visual_text()
   let lines = split(txt, '\n')
+  "validation
+  if blockit#validate(lines) < 0
+    return
+  endif
+
   "line range
   let first = line("'<")
   let last  = line("'>")
