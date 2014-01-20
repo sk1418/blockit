@@ -69,20 +69,28 @@ You can of course customize the mapping in this way:
 
 ###Demo1 
 - dynamic block width
+- H-border '@'  (`g:blockit_H_char='@'`)
+- V-border '*'  (`g:blockit_V_char='*'`)
 - blockit via command
-- text alignment: `center`
+- text alignment: `center` (`g:blockit_align='c'`) 
 
+![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo1.gif)
 
 ###Demo2
 - dynamic block width
-- H-char in border: `.-`
-- V-char in border: `..`
-- blockit via visual selection
-- text alignment: `right`
+- H-char in border: '-'  (default)
+- V-char in border: '|'    (default)
+- blockit via visual selection  (`<leader>bi`)
+- text alignment: no alignment (default)
+
+![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo2.gif)
 
 ###Demo3
-- fixed block width: `40`
-- blockit via visual selection
-- H-char in border: `<>`
-- V-char in border: `<>`
-- text alignment: `no-alignment(default)`
+
+- fixed block width: 40   (`g:blockit_fixed_length=40`)
+- H-char in border: '.-'  (`g:blockit_H_char='.-'`)
+- V-char in border: ..    (`g:blockit_V_char='..'`)
+- blockit via visual selection  (`<leader>bi`)
+- text alignment: right
+
+![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
