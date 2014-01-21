@@ -18,5 +18,99 @@
 <
 ==============================================================================
 
+Author:  Kai Yuan (kent.yuan at gmail dot com)
 
- vim:tw=78:ts=2:sw=2:sts=2:ft=help:norl:
+The blockit plugin was written and tested under Vim 7.4
+
+==============================================================================
+CONTENTS                                                    *blockit-contents*
+
+	1. Intro ............................................. |blockit-intro| 
+	2. Features .......................................... |blockit-features| 
+	3. Configuration ..................................... |blockit-config|
+		3.1 Options ........................................ |blockit-options| 
+	4. Usage
+		4.1 Command ........................................ |blockit-command| 
+		4.2 mapping ........................................ |blockit-visual| 
+	5. Examples .......................................... |blockit-examples| 
+	6. Change Log ........................................ |blockit-changelog|
+
+==============================================================================
+INTRO                                                          *blockit-intro*
+
+When we are coding or editing text in vim, sometimes we want to wrap some
+lines of text (or in visual selections) in a block, which built by ascii
+chars. blockit is the vim plugin, to make this work easily to be done. One can
+"draw" block in different style. 
+
+For more detailed information please check next section: |blockit-features|.
+
+==============================================================================
+FEATURES                                                    *blockit-features*
+
+  - after blocking the text, rearrange the text to make text look good
+  - horizontal/vertical char of the block border could be defined separately
+  - margin between text and block border can be customized
+  - block width can be dynamic (auto fit text width) or fixed
+  - supports 4 in-block text alignment (No align., left-align., right align.
+  		center align.)
+  - supports line-wise and block-wise visual selection text blocking (via
+  		key-mapping)
+  - provide command to block line range
+
+===============================================================================
+CONFIGURATION                                                *blockit-features*
+
+blockit has pre-defined configuration as default. User could just install and
+use without customization. However, if you want to have different border
+style, or text alignment etc, please read this section. blockit could be
+configurated by setting global variables. You can set the required options in
+specific buffer or in ~/.vimrc file.
+
+-------------------------------------------------------------------------------
+OPTIONSa                                                      *blockit-options*
+
+  |g:loaded_blockit| ................... disable blockit plugin
+  |g:blockit_H_char| ................... set the char in horizontal border
+  |g:blockit_V_char| ................... set the char in vertical border
+  |g:blockit_margin| ................... margin between text and border
+  |g:blockit_align| .................... alignment of in-block text
+  |g:blockit_fixed_length| ............. fixed the border width
+
+-------------------------------------------------------------------------------
+Detailed descriptions~
+
+                                                                 *g:loaded_blockit* 
+Use this option to disable blockit plugin:
+>
+  let g:loaded_blockit = 1 
+<
+                                                                 *g:blockit_H_char* 
+Type: string
+Default value: '-'
+Set the char(s) to build the horizontal border. If more than one char was set,
+it would be automatically adjusted by the block width. E.g. set the value with
+'12345', but the width of block was 7, then the border would look like
+'1234512'
+>
+  let g:blockit_H_char = '-'
+<
+
+                                                                 *g:blockit_V_char* 
+Type: string
+Default value: '|'
+Set the char(s) to build the vertical border. The value could be longer than
+1.
+>
+  let g:blockit_V_char = '|'
+<
+>
+        *g:blockit_V_char* 
+        *g:blockit_margin* 
+        *g:blockit_align* 
+        *g:blockit_fixed_length* 
+
+
+
+ vim:tw=78:ts=2:sw=2:sts=2:ft=help:norl
+

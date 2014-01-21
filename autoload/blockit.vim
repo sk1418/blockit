@@ -301,4 +301,4 @@ endfunction
 
 
 
-" vim: fdm=marker ts=2 sw=2 tw=78 expandtab foldlevel=0
+" vim: fdm=marker ts=2 sw=2 tw=78 expandtab

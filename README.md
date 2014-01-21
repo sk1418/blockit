@@ -86,7 +86,7 @@ Use all default configurations:
 - blockit via visual selection  (`<leader>bi`)
 - text alignment: no alignment (default)
 
-![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo2.gif)
+![demo2](https://raw.github.com/sk1418/sharedResources/master/blockit/demo2.gif)
 
 ###Demo3
 
@@ -98,4 +98,4 @@ Use all default configurations:
 
 
 
-![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
+![demo3](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
