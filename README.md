@@ -69,17 +69,20 @@ You can of course customize the mapping in this way:
 
 ###Demo1 
 - dynamic block width
-- H-border '@'  (`g:blockit_H_char='@'`)
-- V-border '*'  (`g:blockit_V_char='*'`)
+- H-border `'@'`  (`g:blockit_H_char='@'`)
+- V-border `'*'`  (`g:blockit_V_char='*'`)
 - blockit via command
 - text alignment: `center` (`g:blockit_align='c'`) 
 
 ![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo1.gif)
 
-###Demo2
+###Demo2 
+
+Use all default configurations:
+
 - dynamic block width
-- H-char in border: '-'  (default)
-- V-char in border: '|'    (default)
+- H-char in border: `'-'` (default)
+- V-char in border: `'|'`    (default)
 - blockit via visual selection  (`<leader>bi`)
 - text alignment: no alignment (default)
 
@@ -87,10 +90,12 @@ You can of course customize the mapping in this way:
 
 ###Demo3
 
-- fixed block width: 40   (`g:blockit_fixed_length=40`)
-- H-char in border: '.-'  (`g:blockit_H_char='.-'`)
-- V-char in border: ..    (`g:blockit_V_char='..'`)
+- fixed block width: `40`   (`g:blockit_fixed_length=40`)
+- H-char in border: `'.-'`  (`g:blockit_H_char='.-'`)
+- V-char in border: `'..'`    (`g:blockit_V_char='..'`)
 - blockit via visual selection  (`<leader>bi`)
-- text alignment: right
+- text alignment: `right` (`g:blockit_align='r'`) 
+
+
 
 ![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
