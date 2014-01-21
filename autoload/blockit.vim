@@ -279,13 +279,17 @@ function! blockit#block_visual()
   let pos = getpos("'<")
   let end_pos = getpos("'>")
 
-  "add empty line before and after the visual area
-  execute pos[1] . 'pu! _'
-  execute end_pos[1]+1 . 'pu _'
-
   call setreg('v', result_txt,visualmode())
+  "remove the visual selected text
   normal! gvx
-  call setpos('.', pos)
+
+  if visualmode() !=# 'V'
+    "C-V visual:add empty line before and after the visual area
+    execute pos[1] . 'pu! _'
+    execute end_pos[1]+1 . 'pu _'
+  endif
+
+  call setpos('.',pos)
   normal! "vP
 
   "restore the @v reg
