@@ -29,9 +29,9 @@ CONTENTS                                                    *blockit-contents*
 	2. Features .......................................... |blockit-features| 
 	3. Configuration ..................................... |blockit-config|
 		3.1 Options ........................................ |blockit-options| 
-	4. Usage
+	4. Usage ............................................. |blockit-usage|
 		4.1 Command ........................................ |blockit-command| 
-		4.2 mapping ........................................ |blockit-visual| 
+		4.2 mapping ........................................ |blockit-mapping| 
 	5. Examples .......................................... |blockit-examples| 
 	6. Change Log ........................................ |blockit-changelog|
 
@@ -88,10 +88,11 @@ Use this option to disable blockit plugin:
                                                                  *g:blockit_H_char* 
 Type: string
 Default value: '-'
-Set the char(s) to build the horizontal border. If more than one char was set,
-it would be automatically adjusted by the block width. E.g. set the value with
-'12345', but the width of block was 7, then the border would look like
-'1234512'
+Set the char(s) to build the horizontal border. 
+
+Note: If more than one char was set, it would be automatically adjusted by the
+block width. E.g. set the value with '12345', but the width of block was 7,
+then the border would look like '1234512'
 >
   let g:blockit_H_char = '-'
 <
@@ -101,16 +102,106 @@ Type: string
 Default value: '|'
 Set the char(s) to build the vertical border. The value could be longer than
 1.
+
 >
   let g:blockit_V_char = '|'
 <
+
+                                                                 *g:blockit_margin* 
+Type: int
+Default value: 1
+Set the margin (number of spaces) between text and block borders. 
 >
-        *g:blockit_V_char* 
-        *g:blockit_margin* 
-        *g:blockit_align* 
-        *g:blockit_fixed_length* 
+  let g:blockit_margin = 1
+<
+
+                                                                 *g:blockit_align* 
+Type string
+Default value: 'n'
+Handle the alignment of the text in block. There are 4 possible values:
+
+'n' : no alignment
+'c' : center alignment
+'l' : left alignment
+'r' : right alignment
+
+Note: If one of 'c', 'l' or 'r' was set, the leading and trailing spaces of
+original text could be re-arranged in block to do the alignment.
+>
+  let g:blockit_align = 'n'
+<
+
+                                                          *g:blockit_fixed_length* 
+Type int
+Default value: 0
+Normally blockit will calculate the width of block based on the longest
+selected line dynamically. However if this option was set, blockit will use
+the given value as the width of block. 
+
+Note: 
+  - if given value < 5, it would be ignored. Because the default
+		2 x default_margin + 2 x default V_char + 1 = 4.  
+	- if value <  (2 x margin + 2 x V_char + length of longest selected line), the
+	blockit operation will be stopped, error message will be displayed.
+
+>
+  let g:blockit_fixed_length = 0
+<
+
+==============================================================================
+USAGE                                                          *blockit-usage*
+
+There are two ways to use blockit plugin. Using command or via visual
+selection.
+
+
+
+-------------------------------------------------------------------------------
+Commands~
+                                                               *blockit-command*
+
+blockit has two commands:
+
+                                                               *:BlockitVersion*
+print the current installed blockit version.
+
+                                                               *:Block*
+:[range]Block
+
+The :Block command will wrap [range] lines in block.
+
+-------------------------------------------------------------------------------
+Mappings~
+                                                               *blockit-mapping*
+
+blockit supports wrap visual selected text in a block by pressing visual mode
+mapping keys. Only block-wise(Ctrl-v) and line-wise(V) selection are
+supported. The default mapping is:
+
+>
+ <leader>bi
+<
+
+The mapping could be customized by:
+>
+  vmap (Your_Mapping) <Plug>BlockitVisual
+<
+
+==============================================================================
+EXAMPLES                                                    *blockit-examples*
+
+examples and demos please check the project homepage:
+https://github.com/sk1418/blockit
+
+==============================================================================
+CHANGELOG                                                   *blockit-changelog*
+
+2014-01-23 Version 1.0.0~
+- first release
+
+
+
 
 
 
  vim:tw=78:ts=2:sw=2:sts=2:ft=help:norl
-
