@@ -68,7 +68,7 @@ configurated by setting global variables. You can set the required options in
 specific buffer or in ~/.vimrc file.
 
 -------------------------------------------------------------------------------
-OPTIONSa                                                      *blockit-options*
+OPTIONS                                                       *blockit-options*
 
   |g:loaded_blockit| ................... disable blockit plugin
   |g:blockit_H_char| ................... set the char in horizontal border
@@ -80,17 +80,17 @@ OPTIONSa                                                      *blockit-options*
 -------------------------------------------------------------------------------
 Detailed descriptions~
 
-                                                                 *g:loaded_blockit* 
+                                                             *g:loaded_blockit* 
 Use this option to disable blockit plugin:
 >
   let g:loaded_blockit = 1 
 <
-                                                                 *g:blockit_H_char* 
+                                                             *g:blockit_H_char* 
 Type: string
 Default value: '-'
 Set the char(s) to build the horizontal border. 
 
-Note: If more than one char was set, it would be automatically adjusted by the
+NOTE: If more than one char was set, it would be automatically adjusted by the
 block width. E.g. set the value with '12345', but the width of block was 7,
 then the border would look like '1234512'
 >
@@ -125,7 +125,7 @@ Handle the alignment of the text in block. There are 4 possible values:
 'l' : left alignment
 'r' : right alignment
 
-Note: If one of 'c', 'l' or 'r' was set, the leading and trailing spaces of
+NOTE: If one of 'c', 'l' or 'r' was set, the leading and trailing spaces of
 original text could be re-arranged in block to do the alignment.
 >
   let g:blockit_align = 'n'
@@ -138,7 +138,7 @@ Normally blockit will calculate the width of block based on the longest
 selected line dynamically. However if this option was set, blockit will use
 the given value as the width of block. 
 
-Note: 
+NOTE: 
   - if given value < 5, it would be ignored. Because the default
 		2 x default_margin + 2 x default V_char + 1 = 4.  
 	- if value <  (2 x margin + 2 x V_char + length of longest selected line), the
@@ -198,10 +198,6 @@ CHANGELOG                                                   *blockit-changelog*
 
 2014-01-23 Version 1.0.0~
 - first release
-
-
-
-
 
 
  vim:tw=78:ts=2:sw=2:sts=2:ft=help:norl
