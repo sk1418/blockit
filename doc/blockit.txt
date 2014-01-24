@@ -25,7 +25,7 @@ The blockit plugin was written and tested under Vim 7.4
 ==============================================================================
 CONTENTS                                                    *blockit-contents*
 
-	1. Intro ............................................. |blockit-intro| 
+	1. Introduction ...................................... |blockit-intro| 
 	2. Features .......................................... |blockit-features| 
 	3. Configuration ..................................... |blockit-config|
 		3.1 Options ........................................ |blockit-options| 
@@ -36,7 +36,7 @@ CONTENTS                                                    *blockit-contents*
 	6. Change Log ........................................ |blockit-changelog|
 
 ==============================================================================
-INTRO                                                          *blockit-intro*
+INTRODUCTION                                                *blockit-intro*
 
 When we are coding or editing text in vim, sometimes we want to wrap some
 lines of text (or in visual selections) in a block, which built by ascii
@@ -48,7 +48,6 @@ For more detailed information please check next section: |blockit-features|.
 ==============================================================================
 FEATURES                                                    *blockit-features*
 
-  - after blocking the text, rearrange the text to make text look good
   - horizontal/vertical char of the block border could be defined separately
   - margin between text and block border can be customized
   - block width can be dynamic (auto fit text width) or fixed

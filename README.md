@@ -19,7 +19,6 @@ When we are coding or editing text in vim, sometimes we want to wrap some lines 
 
 ##Features
 
-- after blocking the text, rearrange the text to make text look good
 - horizontal/vertical char of the block border could be defined separately
 - margin between text and block border can be customized
 - block width can be dynamic (auto fit text width) or fixed
@@ -39,12 +38,12 @@ varialbe                 |values                                                
 `*g:blockit_fixed_length`|`int:` if you want the block has fixed width, value >=5|`0`
 `g:blockit_align`        |`string:` one of `'c','l','r','n'`                     |`'n'` (no alignment)
 
-***** for the fixed length, please read the plugin docs for details.
+**`*`** for the fixed length, please read the plugin docs for details.
 
 
 ##Usage
 
-It is easy to use the **blockit** plugin. There is two commands and one mapping ready to use.
+It is easy to use the **blockit** plugin. There are two commands and one mapping ready to use.
 
 ###command
 
@@ -95,7 +94,5 @@ Use all default configurations:
 - V-char in border: `'..'`    (`g:blockit_V_char='..'`)
 - blockit via visual selection  (`<leader>bi`)
 - text alignment: `right` (`g:blockit_align='r'`) 
-
-
 
 ![demo3](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
