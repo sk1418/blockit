@@ -58,7 +58,7 @@ FEATURES                                                    *blockit-features*
   - provide command to block line range
 
 ===============================================================================
-CONFIGURATION                                                *blockit-features*
+CONFIGURATION                                                *blockit-config*
 
 blockit has pre-defined configuration as default. User could just install and
 use without customization. However, if you want to have different border
