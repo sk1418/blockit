@@ -14,10 +14,14 @@
 	!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
-##Introduction
-When we are coding or editing text in vim, sometimes we want to wrap some lines of text (or in visual selections) in a block, which built by ascii chars. **blockit** is the vim plugin, to make this work easily to be done. One can "draw" block in different style. Please read next section for detailed features.
+## Introduction
 
-##Features
+When we are coding or editing text in vim, sometimes we want to wrap some lines of text (or in visual selections) in a
+block, which built by ASCII chars. **blockit** is the vim plugin, to make this work easily to be done. One can "draw"
+block in different style. Please read next section for detailed features.
+
+
+## Features
 
 - horizontal/vertical char of the block border could be defined separately
 - margin between text and block border can be customized
@@ -27,10 +31,12 @@ When we are coding or editing text in vim, sometimes we want to wrap some lines 
 - provide command to block line range
 
 
-##Configuration
-There are 5 variables could be customized to configurate block style: (more detailed information please check the plugin doc.)
+## Configuration
 
-varialbe                 |values                                                 |default
+There are 5 variables could be customized to configure block style: (more detailed information please check the plugin
+doc.)
+
+variable                 |values                                                 |default
 ---                      |---                                                    |---
 `g:blockit_H_char`       |`string:` horizontal border char(s)                    |`'-'`
 `g:blockit_V_char`       |`string:` vertical border char(s)                      |'&#124;'
@@ -41,16 +47,18 @@ varialbe                 |values                                                
 **`*`** for the fixed length, please read the plugin docs for details.
 
 
-##Usage
+## Usage
 
 It is easy to use the **blockit** plugin. There are two commands and one mapping ready to use.
 
-###command
 
-- `[range]:Block`: This command will block the line range, with the settings in "Configuration" section.  
+### command
+
+- `[range]:Block`: This command will block the line range, with the settings in "Configuration" section.
 - `:BlockitVersion`  will print the current version info of installed **blockit**
 
-###Mapping
+
+### Mapping
 
 Mapping is **only** available in `line-wise` or `block-wise` visual selection mode.
 
@@ -60,22 +68,25 @@ Default:
 
 This mapping will block the visual selected text.
 
-You can of course customize the mapping in this way:
+You can customize the mapping in this way:
 
 	vmap (Your_Mapping) <Plug>BlockitVisual
 
-##Demo
+## Demo
 
-###Demo1 
+
+### Demo1
+
 - dynamic block width
 - H-border `'@'`  (`g:blockit_H_char='@'`)
 - V-border `'*'`  (`g:blockit_V_char='*'`)
 - blockit via command
-- text alignment: `center` (`g:blockit_align='c'`) 
+- text alignment: `center` (`g:blockit_align='c'`)
 
 ![demo1](https://raw.github.com/sk1418/sharedResources/master/blockit/demo1.gif)
 
-###Demo2 
+
+### Demo2
 
 Use all default configurations:
 
@@ -87,12 +98,13 @@ Use all default configurations:
 
 ![demo2](https://raw.github.com/sk1418/sharedResources/master/blockit/demo2.gif)
 
-###Demo3
+### Demo3
 
 - fixed block width: `40`   (`g:blockit_fixed_length=40`)
 - H-char in border: `'.-'`  (`g:blockit_H_char='.-'`)
 - V-char in border: `'..'`    (`g:blockit_V_char='..'`)
 - blockit via visual selection  (`<leader>bi`)
-- text alignment: `right` (`g:blockit_align='r'`) 
+- text alignment: `right` (`g:blockit_align='r'`)
 
 ![demo3](https://raw.github.com/sk1418/sharedResources/master/blockit/demo3.gif)
+
