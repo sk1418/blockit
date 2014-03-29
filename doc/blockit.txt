@@ -1,4 +1,4 @@
-*blockit.txt* A vim plugin to wrap text in block 
+*blockit.txt* A vim plugin to wrap text in block
 *blockit* *BlockIt*
 
 ==============================================================================
@@ -25,23 +25,23 @@ The blockit plugin was written and tested under Vim 7.4
 ==============================================================================
 CONTENTS                                                    *blockit-contents*
 
-	1. Introduction ...................................... |blockit-intro| 
-	2. Features .......................................... |blockit-features| 
+	1. Introduction ...................................... |blockit-intro|
+	2. Features .......................................... |blockit-features|
 	3. Configuration ..................................... |blockit-config|
-		3.1 Options ........................................ |blockit-options| 
+		3.1 Options ........................................ |blockit-options|
 	4. Usage ............................................. |blockit-usage|
-		4.1 Command ........................................ |blockit-command| 
-		4.2 mapping ........................................ |blockit-mapping| 
-	5. Examples .......................................... |blockit-examples| 
+		4.1 Command ........................................ |blockit-command|
+		4.2 mapping ........................................ |blockit-mapping|
+	5. Examples .......................................... |blockit-examples|
 	6. Change Log ........................................ |blockit-changelog|
 
 ==============================================================================
 INTRODUCTION                                                *blockit-intro*
 
 When we are coding or editing text in vim, sometimes we want to wrap some
-lines of text (or in visual selections) in a block, which built by ascii
+lines of text (or in visual selections) in a block, which built by ASCII
 chars. blockit is the vim plugin, to make this work easily to be done. One can
-"draw" block in different style. 
+"draw" block in different style.
 
 For more detailed information please check next section: |blockit-features|.
 
@@ -63,7 +63,7 @@ CONFIGURATION                                                *blockit-config*
 blockit has pre-defined configuration as default. User could just install and
 use without customization. However, if you want to have different border
 style, or text alignment etc, please read this section. blockit could be
-configurated by setting global variables. You can set the required options in
+configured by setting global variables. You can set the required options in
 specific buffer or in ~/.vimrc file.
 
 -------------------------------------------------------------------------------
@@ -79,24 +79,24 @@ OPTIONS                                                       *blockit-options*
 -------------------------------------------------------------------------------
 Detailed descriptions~
 
-                                                             *g:loaded_blockit* 
+                                                             *g:loaded_blockit*
 Use this option to disable blockit plugin:
 >
-  let g:loaded_blockit = 1 
+  let g:loaded_blockit = 1
 <
-                                                             *g:blockit_H_char* 
+                                                             *g:blockit_H_char*
 Type: string
 Default value: '-'
-Set the char(s) to build the horizontal border. 
+Set the char(s) to build the horizontal border.
 
 NOTE: If more than one char was set, it would be automatically adjusted by the
 block width. E.g. set the value with '12345', but the width of block was 7,
-then the border would look like '1234512'
+then the border would look like '1234512'.
 >
   let g:blockit_H_char = '-'
 <
 
-                                                                 *g:blockit_V_char* 
+                                                                 *g:blockit_V_char*
 Type: string
 Default value: '|'
 Set the char(s) to build the vertical border. The value could be longer than
@@ -106,15 +106,15 @@ Set the char(s) to build the vertical border. The value could be longer than
   let g:blockit_V_char = '|'
 <
 
-                                                                 *g:blockit_margin* 
+                                                                 *g:blockit_margin*
 Type: int
 Default value: 1
-Set the margin (number of spaces) between text and block borders. 
+Set the margin (number of spaces) between text and block borders.
 >
   let g:blockit_margin = 1
 <
 
-                                                                 *g:blockit_align* 
+                                                                 *g:blockit_align*
 Type string
 Default value: 'n'
 Handle the alignment of the text in block. There are 4 possible values:
@@ -130,16 +130,16 @@ original text could be re-arranged in block to do the alignment.
   let g:blockit_align = 'n'
 <
 
-                                                          *g:blockit_fixed_length* 
+                                                          *g:blockit_fixed_length*
 Type int
 Default value: 0
 Normally blockit will calculate the width of block based on the longest
 selected line dynamically. However if this option was set, blockit will use
-the given value as the width of block. 
+the given value as the width of block.
 
-NOTE: 
+NOTE:
   - if given value < 5, it would be ignored. Because the default
-		2 x default_margin + 2 x default V_char + 1 = 4.  
+		2 x default_margin + 2 x default V_char + 1 = 4.
 	- if value <  (2 x margin + 2 x V_char + length of longest selected line), the
 	blockit operation will be stopped, error message will be displayed.
 
