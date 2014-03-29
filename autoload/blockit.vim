@@ -20,7 +20,7 @@
 "CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 " }}}
 
-if exists("g:autoloaded_blockit") 
+if exists("g:autoloaded_blockit")
   finish
 endif
 let g:autoloaded_blockit = 1
@@ -42,14 +42,13 @@ let s:fixed_min = 4
 "}}}
 
 "//////////////////////////////////////////////////////////////////////
-"                         Helper  functions                         
+"                         Helper  functions
 "//////////////////////////////////////////////////////////////////////
 "{{{
 
 "=================================
 " calculate the header/bottom border
 " length, and return the built line
-" For example H_char was longer than 1
 " the "block" should look pretty
 "=================================
 function! blockit#calc_header(maxlen)
@@ -60,7 +59,7 @@ endfunction
 
 
 "=================================
-"get the max length of the line in 
+"get the max length of the line in
 "given list.
 "=================================
 function! blockit#max_len(lines)
@@ -154,12 +153,12 @@ endfunction
 "//////////////////////////////////////////////////////////////////////
 
 "============================
-" validate the fixed_length if it is set 
+" validate the fixed_length if it is set
 "============================
 function! blockit#validate(lines)
   let maxl = blockit#max_len(a:lines)
-  if g:blockit_fixed_length>s:fixed_min 
-    if g:blockit_fixed_length <= (g:blockit_margin + g:blockit_V_char)*2 
+  if g:blockit_fixed_length>s:fixed_min
+    if g:blockit_fixed_length <= (g:blockit_margin + g:blockit_V_char)*2
       call blockit#err('Fixed length is too short')
       return -1
       "error & exit if fixed_length was set (>5) but less than maxl+margin+V(chars)
@@ -173,11 +172,11 @@ function! blockit#validate(lines)
 endfunction
 
 "============================
-"the block main logic 
+"the block main logic
 "parameters:
 "
-"lines : a list, contains all text needs to be blocked, 
-"the text in line is already be extened with spaces to 
+"lines : a list, contains all text needs to be blocked,
+"the text in line is already be extened with spaces to
 "fit the maxlen (len of the longest line)
 "
 "return a list, with block characters
@@ -194,7 +193,7 @@ function! blockit#block(lines)
 
   "the header/bottom line
   let h = blockit#calc_header(maxl)
-  
+
   " block and align each line  using map()
   call map(my_lines, 'blockit#block_single_line(v:val, maxl)')
 
@@ -247,11 +246,11 @@ endfunction
 
 
 "============================
-" handle visual selection, in fact 
+" handle visual selection, in fact
 " only block-wise select needs special
 " handling
 "
-" the invokation of this function should 
+" the invokation of this function should
 " be come from mapping, instread of command
 "============================
 function! blockit#block_visual()
@@ -295,10 +294,7 @@ function! blockit#block_visual()
   "restore the @v reg
   let @v = v_save
   let &virtualedit = ve_save
-  
+
 endfunction
-
-
-
 
 " vim: fdm=marker ts=2 sw=2 tw=78 expandtab
