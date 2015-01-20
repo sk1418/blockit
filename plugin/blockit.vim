@@ -27,7 +27,7 @@ endif
 let g:loaded_blockit = 1
 
 let s:version = '1.0.0'
-command! BlockitVersion echo "[blockit] Version: " . sversion
+command! BlockitVersion echo "[blockit] Version: " . s:version
 
 " mappings for visual selection
 "{{{
